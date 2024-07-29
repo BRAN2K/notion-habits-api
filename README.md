@@ -38,20 +38,33 @@ Acesse a URL `/api/habit?habitName=Exercise` onde `habitName` é o nome do hábi
 curl -X GET "http://localhost:3000/api/habit?habitName=Exercise"
 ```
 
-## Estrutura do Projeto
+## Configuração do Docker (Opctional)
 
-- `src/`
-  - `controllers/`
-    - `habitController.ts`: Lógica dos controladores.
-  - `services/`
-    - `notionService.ts`: Funções para interagir com a API do Notion.
-  - `routes/`
-    - `habitRoutes.ts`: Definição das rotas.
-  - `app.ts`: Configuração do aplicativo Express.
-  - `server.ts`: Configuração do servidor.
-  - `config/`
-    - `notionFields.ts`: Campos fixos do banco de dados do Notion.
+### Pré-requisitos
 
-## Contribuição
+Certifique-se de que o Docker está instalado em sua máquina. Você pode baixar e instalar o Docker a partir do [site oficial do Docker](https://www.docker.com/get-started).
 
-Sinta-se à vontade para contribuir com o projeto através de pull requests.
+### Configuração do Docker
+
+1. **Construa a Imagem Docker**
+
+   Execute o seguinte comando para construir a imagem Docker:
+
+   ```bash
+   docker build -t notion-habits-api .
+   ```
+
+   Este comando constrói a imagem Docker e a marca como `notion-habits-api`.
+   <br>
+
+2. **Execute o Container Docker**
+
+   Execute o seguinte comando para iniciar um container a partir da imagem construída:
+
+   ```bash
+   docker run -p 8080:8080 --env-file .env my-notion-habits-api
+   ```
+
+   - `-p 8080:8080` mapeia a porta `8080` do container para a porta `8080` no seu host.
+   - `--env-file .env` carrega variáveis de ambiente do arquivo `.env`.
+   - `my-notion-habits-api` é o nome da imagem Docker.

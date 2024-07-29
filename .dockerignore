@@ -1,0 +1,19 @@
+# Node modules e arquivos de cache
+node_modules
+npm-debug.log
+
+# Diretórios e arquivos que não são necessários para o build
+.dockerignore
+Dockerfile
+docker-compose.yml
+.git
+.gitignore
+
+# Arquivos de ambiente
+.env
+
+# Diretórios de testes e build
+tests
+coverage
+build
+dist
