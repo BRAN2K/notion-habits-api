@@ -107,3 +107,22 @@ export const updateHabit = async (pageId: string, habitName: string) => {
 
   return response.data;
 };
+
+/**
+ * Retrieves all checkbox properties (habits) from the Notion database.
+ * @returns A list of checkbox properties.
+ */
+export const getAllHabitsFromDatabase = async () => {
+  const response = await notion.get(`/databases/${databaseId}`);
+
+  const properties = response.data.properties;
+  const checkBoxProperties = [];
+
+  for (const prop in properties) {
+    if (properties[prop].type === "checkbox") {
+      checkBoxProperties.push(prop);
+    }
+  }
+
+  return checkBoxProperties;
+};

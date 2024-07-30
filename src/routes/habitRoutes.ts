@@ -44,4 +44,30 @@ router.get(
   markHabitAsDone
 );
 
+import { getAllHabits } from "../controllers/habitController";
+
+/**
+ * @swagger
+ * /habits:
+ *   get:
+ *     summary: Retrieve all habit checkbox properties
+ *     description: Retrieves all checkbox properties from the Notion database.
+ *     responses:
+ *       200:
+ *         description: List of habit checkbox properties
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 habits:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   example: ["Exercise", "Read", "Meditate"]
+ *       500:
+ *         description: Internal server error
+ */
+router.get("/habits", getAllHabits);
+
 export default router;

@@ -4,6 +4,7 @@ import {
   getTodayPage,
   createTodayPage,
   updateHabit,
+  getAllHabitsFromDatabase,
 } from "../services/notionService";
 
 /**
@@ -45,5 +46,22 @@ export const markHabitAsDone = async (req: Request, res: Response) => {
     res
       .status(500)
       .json({ error: "An error occurred while marking the habit as done." });
+  }
+};
+
+/**
+ * Gets all habit checkbox properties from the Notion database.
+ * @param req - Express request object.
+ * @param res - Express response object to send the response to the client.
+ */
+export const getAllHabits = async (req: Request, res: Response) => {
+  try {
+    const habits = await getAllHabitsFromDatabase();
+    res.status(200).json({ habits });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while retrieving habits." });
   }
 };

@@ -30,15 +30,15 @@ Esta é uma API construída em Node.js com TypeScript para marcar hábitos diár
    npm start
    ```
 
-## Uso
+## Uso / Documentação Swagger
 
-Acesse a URL `/api/habit?habitName=Exercise` onde `habitName` é o nome do hábito:
+Visite a URL `/api-docs` para saber mais sobre os endpoints da API:
 
 ```bash
-curl -X GET "http://localhost:3000/api/habit?habitName=Exercise"
+curl -X GET "http://localhost:3000/api-docs"
 ```
 
-## Configuração do Docker (Opctional)
+## Configuração do Docker (Opcional)
 
 ### Pré-requisitos
 
