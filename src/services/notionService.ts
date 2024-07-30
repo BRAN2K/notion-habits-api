@@ -49,7 +49,7 @@ export const getTodayPage = async () => {
   const today = new Date().toISOString().split("T")[0];
   const response = await notion.post(`/databases/${databaseId}/query`, {
     filter: {
-      property: notionFields.DATE_FIELD,
+      property: notionFields.date,
       date: {
         equals: today,
       },
@@ -70,12 +70,12 @@ export const createTodayPage = async () => {
   const response = await notion.post("/pages", {
     parent: { database_id: databaseId },
     properties: {
-      [notionFields.DATE_FIELD]: {
+      [notionFields.date]: {
         date: {
           start: today.toISOString().split("T")[0],
         },
       },
-      [notionFields.HABIT_FIELD]: {
+      [notionFields.title]: {
         title: [
           {
             text: {

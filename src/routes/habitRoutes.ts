@@ -1,6 +1,10 @@
 import { Router } from "express";
+import { routes } from "../config/routeConfig";
 import { query } from "express-validator";
-import { markHabitAsDone } from "../controllers/habitController";
+import {
+  markHabitAsDone,
+  getHabitQrCodes,
+} from "../controllers/habitController";
 
 const router = Router();
 
@@ -34,7 +38,7 @@ const router = Router();
  *         description: Internal server error
  */
 router.get(
-  "/habit",
+  routes.habit.apiRoute,
   [
     query("habitName")
       .isString()
@@ -68,6 +72,43 @@ import { getAllHabits } from "../controllers/habitController";
  *       500:
  *         description: Internal server error
  */
-router.get("/habits", getAllHabits);
+router.get(routes.habits.apiRoute, getAllHabits);
+
+/**
+ * @swagger
+ * /qrcode:
+ *   get:
+ *     summary: Generate QR code(s) for marking a habit or all habits as done
+ *     description: Generates QR code(s) that link to the URL for marking the specified or all habits as done. The QR codes will be returned as downloadable images.
+ *     parameters:
+ *       - in: query
+ *         name: habitName
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The name of the habit for which to generate the QR code, or "all" to generate QR codes for all habits.
+ *     responses:
+ *       200:
+ *         description: QR code(s) generated successfully
+ *         content:
+ *           application/octet-stream:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       400:
+ *         description: Bad request
+ *       500:
+ *         description: Internal server error
+ */
+router.get(
+  routes.qrcode.apiRoute,
+  [
+    query("habitName")
+      .isString()
+      .notEmpty()
+      .withMessage("habitName is required and must be a string"),
+  ],
+  getHabitQrCodes
+);
 
 export default router;
