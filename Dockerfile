@@ -14,7 +14,6 @@ RUN npm install
 COPY . .
 
 # Definir variáveis de ambiente
-ENV PORT=8080
 ENV NODE_ENV=production
 
 # Expor a porta em que a aplicação irá rodar
